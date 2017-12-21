@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 
-from schedule.api import PatientResource
+from schedule.api import PatientResource, ProcedureResource
 
 
 urlpatterns = [
     url(r'^patients/', include(PatientResource.urls())),
+    url(r'^procedures/', include(ProcedureResource.urls())),
 ]

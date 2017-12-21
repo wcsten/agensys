@@ -40,3 +40,40 @@ class PatientResource(DjangoResource):
 
     def is_authenticated(self):
         return True
+
+
+class ProcedureResource(DjangoResource):
+    preparer = FieldsPreparer(fields={
+        'name': 'name',
+        'description': 'description',
+    })
+
+    def list(self):
+        return Procedure.objects.all()
+
+    def create(self):
+        return Procedure.objects.create(
+            name=self.data['name'],
+            description=self.data['description'],
+        )
+
+    def detail(self, pk):
+        return get_object_or_404(Procedure, pk=pk)
+
+    def update(self, pk):
+        procedure = self.detail(pk)
+
+        procedure.name = self.data['name']
+        procedure.description = self.data['description']
+        procedure.save()
+
+        return procedure
+
+    def delete(self, pk):
+        procedure = self.detail(pk)
+        procedure.delete()
+
+        return "Procedimento Deletado"
+
+    def is_authenticated(self):
+        return True
