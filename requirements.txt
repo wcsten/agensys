@@ -1,4 +1,4 @@
-Django==1.10
+Django==1.10.8
 restless==2.1.1
 pytest
 pytest-django
